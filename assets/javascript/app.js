@@ -4,29 +4,36 @@ $(document).ready(function () {
     var shows = ["Friends", "Seinfeld", "Frasier"];
 
     function displayInfo() {
-        var showName = $(this).attr("data");
-        var queryURL = "https://api.giphy.com/v1/gifs/search?limit=10&rating=PG-13&q=" + tvShow + "&api_key=3vzQRZcFXY3zkusaoBZc5T6RrA4IJcVu";
+        var show = $(this).attr("data");
+        var queryURL = "https://api.giphy.com/v1/gifs/search?limit=10&rating=PG-13&q=" + show + "&api_key=3vzQRZcFXY3zkusaoBZc5T6RrA4IJcVu";
 
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
 
-            // Create a div to hold the movie.
-            var showDiv = $("<div class='show'>");
+            for (i = 0; i < response.data.length; i++) {
 
-            // Store and display the rating data.
-            var rating = response.Rated;
-            var ratingText = $("<p>").text("Rating: " + rating);
-            showDiv.append(ratingText);
+                // Create a div to hold the movie.
+                var showDiv = $("<div class='show'>");
 
-            // Store and display the image.
-            var imgURL = response.Poster;
-            var image = $("<img>").attr("src", imgURL);
-            showDiv.append(image);
+                // Store and display the rating data.
+                var rating = response.data[i].rating;
+                var ratingText = $("<p>").text("Rating: " + rating);
+                showDiv.append(ratingText);
 
-            // Put the show above the previously displayed show.
-            $("#show-view").prepend(showDiv);
+                // Store and display the image.
+                var imgURL = response.data[i].images.fixed_height_still.url;
+                var image = $("<img>").attr("src", imgURL).attr("class", "still");
+                showDiv.append(image);
+
+                var imgURL2 = response.data[i].images.fixed_height.url;
+                var image2 = $("<img>").attr("src", imgURL2).attr("class", "animated");
+                showDiv.append(image2);
+
+                // Put the show above the previously displayed show.
+                $("#show-view").prepend(showDiv);
+            }
         });
     }
 
@@ -37,7 +44,7 @@ $(document).ready(function () {
 
         for (i = 0; i < shows.length; i++) {
             var a = $("<button>");
-            a.addClass("show");
+            a.addClass("show-button");
             a.attr("data", shows[i]);
             a.text(shows[i]);
             $("#show-buttons").append(a);
@@ -45,7 +52,7 @@ $(document).ready(function () {
     };
 
     // Create function to trigger AJAX call.
-    $("#find-show").on("click", function (event) {
+    $("#add-show").on("click", function (event) {
 
         // Preventing the submit button from trying to submit the form.
         event.preventDefault();
@@ -57,7 +64,7 @@ $(document).ready(function () {
         renderButtons();
     });
 
-    $(document).on("click", ".show", testAlert);
+    $(document).on("click", ".show-button", displayInfo);
 
     renderButtons();
 
