@@ -19,17 +19,17 @@ $(document).ready(function () {
                 // Create a div to hold the movie.
                 var showDiv = $("<div class='show'>");
 
-                // Store and display the rating data.
-                var rating = response.data[i].rating;
-                var ratingText = $("<p>").text("Rating: " + rating.toUpperCase());
-                showDiv.append(ratingText);
-
                 // Store each of the images in its state (animated or still).
                 var imgURL = response.data[i].images.fixed_height_still.url;
                 var stillURL = response.data[i].images.fixed_height_still.url;
                 var animatedURL = response.data[i].images.fixed_height.url;
                 var image = $("<img>").attr("src", imgURL).attr("class", "gifs").attr("state", "still").attr("clicked-image", animatedURL).attr("still-image", stillURL);
                 showDiv.append(image);
+
+                // Store and display the rating data.
+                var rating = response.data[i].rating;
+                var ratingText = $("<p>").text("Rating: " + rating.toUpperCase());
+                showDiv.append(ratingText);
 
                 // List each of the shows displayed above.
                 $("#show-view").prepend(showDiv);
