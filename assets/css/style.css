@@ -1,4 +1,16 @@
+body {
+    margin: 0;
+    height: 100%;
+    background-image: url(../images/background.jpg);
+    justify-content: center;
+}
+
 .show {
     display: inline-block;
     padding: 20px;
-}
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+    text-emphasis: bold;
+};
+

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>90s Gifs!</title>
+    <title>90s TV Shows!</title>
     <link rel="stylesheet" href="assets/css/style.css">
 
     <!-- Bootstrap reference -->
@@ -18,19 +18,20 @@
 <body>
 
     <div class=container>
-        <h1>90s TV Shows</h1>
+        <nav class="navbar text-light bg-info">
+            <a class="navbar-brand">'90s TV Shows</a>
 
+            <!-- Users will be able to enter their search for a show here. -->
+            <form id="show-form" class="form-inline">
+                <input class="form-control mr-sm-2" input type="text" id="show-input" placeholder="Search for 90s Show">
+                <button class="btn btn-outline-light my-2 my-sm-0" id="add-show" type="submit">Add Show</button>
+            </form>
+        </nav><br>
+
+        <!-- This is where we will hold the buttons for each of the TV shows. -->
         <div id="show-buttons"></div><br>
-        
-        <form id="show-form">
-            <label for="show-input">Search for 90s Show</label>
-            <input type="text" id="show-input"><br>
 
-            <!-- Trigger AJAX call. -->
-            <input id="add-show" type="submit" value="Add Show">
-        </form>
-
-        <!-- Create a div for JSON content. -->
+        <!-- Create a div for the show(s) content. -->
         <div id="show-view"></div>
 
 
